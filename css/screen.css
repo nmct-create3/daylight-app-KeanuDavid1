@@ -2,6 +2,24 @@
 #FONTS
 \*------------------------------------*/
 
+@font-face{
+    font-family: "Work Sans";
+    font-weight: 200;
+    src: url("../fonts/Work_Sans/WorkSans-Light.ttf");
+}
+
+@font-face{
+    font-family: "Work Sans";
+    font-weight: 400;
+    src: url("../fonts/Work_Sans/WorkSans-Regular.ttf");
+}
+
+@font-face{
+    font-family: "Work Sans";
+    font-weight: 600;
+    src: url("../fonts/Work_Sans/WorkSans-Bold.ttf");
+}
+
 /*------------------------------------*\
 #Variables
 \*------------------------------------*/
@@ -9,9 +27,19 @@
 :root {
     /* colors */
 
+    --global-color-alpha: #CCE7FF;
+    --global-color-alpha-dark: #0F3557;
+
     /* opacity */
 
+    --global-color-alpha-dark-opacity: rgba(15, 53, 87, 0.5);
+
     /* transitions */
+
+}
+.is-night{
+    --color-alpha-dark: var(--global-color-alpha);
+    --color-alpha: var(--global-color-alpha-dark, red);
 }
 
 /*------------------------------------*\
@@ -27,10 +55,12 @@
 html {
     font-size: 16px;
     line-height: 1.5;
-    font-family: Helvetica, arial, sans-serif;
+    font-family: "Work Sans", Helvetica, arial, sans-serif;
+    font-feature-settings: "zero" 1; 
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-alpha, var(--global-color-alpha));
 }
 
 *,
@@ -47,13 +77,13 @@ html {
 */
 
 ::-moz-selection {
-    background: red;
+    background: var(--global-color-alpha-dark);
     color: white;
     text-shadow: none;
 }
 
 ::selection {
-    background: red;
+    background: var(--global-color-alpha-dark);
     color: white;
     text-shadow: none;
 }
@@ -242,6 +272,7 @@ input::placeholder {
 #COMPONENTS
 \*------------------------------------*/
 
+
 /*
     Component: Logo
     ---
@@ -249,7 +280,11 @@ input::placeholder {
 */
 
 .c-logo {
-
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 400;
 }
 
 /*
@@ -259,7 +294,9 @@ input::placeholder {
 */
 
 .c-sun {
-
+    height: 22px;
+    width: 22px;
+    margin-right: 8px;
 }
 
 .c-logo .c-sun {
@@ -272,11 +309,88 @@ input::placeholder {
     Main app wrapper
 */
 
+.c-app{
+    margin: 0 auto;
+    width: 400px;
+    height: 100vmin;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.c-app--item{
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.c-app__summary{
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 40px;
+}
+
 /*
     Component: Horizon
     ---
     Horizon with sun visualisation
 */
+
+.c-horizon {
+    /* margin-bottom: 34px; */
+    flex-grow: 8;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.c-horizon__line {
+    height: 22px;
+    border-top: 1px solid var(--global-color-alpha-dark);
+    display: flex;
+    justify-content: space-between;
+}
+
+.c-horizon__time {
+    font-size: 12px;
+    margin-top: 8px;
+    line-height: 14px;
+}
+
+.c-horizon__sky-wrapper {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    padding-top: 24px;
+    padding-right: 40px;
+}
+
+.c-horizon__sky {
+    position: relative;
+    height: 100%;
+}
+
+.c-horizon__sun {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    transform: translateY(22px);
+}
+
+.c-horizon__sun .c-sun{
+    margin: 0;
+}
+
+.c-horizon__sun::before {
+    display: block;
+    content: attr(data-time);
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 8px;
+    text-align: center;
+}
 
 /*------------------------------------*\
 #UTILITIES
@@ -286,6 +400,10 @@ input::placeholder {
     Utilities: Mute
     Mute with opacity
 */
+
+.u-muted {
+    opacity: 0.6;
+}
 
 /*------------------------------------*\
 #STATES
@@ -366,4 +484,5 @@ input::placeholder {
     h3 {
         page-break-after: avoid;
     }
+
 }
