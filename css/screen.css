@@ -60,6 +60,7 @@ html {
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    color: var(--color-alpha-dark, var(--global-color-alpha-dark));
     background-color: var(--color-alpha, var(--global-color-alpha));
 }
 
@@ -297,6 +298,7 @@ input::placeholder {
     height: 22px;
     width: 22px;
     margin-right: 8px;
+    fill: var(--color-alpha-dark)
 }
 
 .c-logo .c-sun {
@@ -345,7 +347,7 @@ input::placeholder {
 
 .c-horizon__line {
     height: 22px;
-    border-top: 1px solid var(--global-color-alpha-dark);
+    border-top: 1px solid var(--color-alpha-dark, var(--global-color-alpha-dark));
     display: flex;
     justify-content: space-between;
 }
